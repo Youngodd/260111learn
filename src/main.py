@@ -1,4 +1,4 @@
-from parser import parse_numbers, ParseError
+from src.expression import evaluate_expression, ParseError
 from calculator import calculate_sum
 
 
@@ -13,8 +13,8 @@ def main() -> None:
             return
 
         try:
-            numbers = parse_numbers(expression)
-            total = calculate_sum(numbers)
+            total = evaluate_expression(expression)
+
             if total.is_integer():
                 print(f"结果：{int(total)}")
             else:
