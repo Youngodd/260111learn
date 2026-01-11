@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 
-from src.parser import parse_numbers, ParseError
+from src.expression import evaluate_expression, ParseError
 from src.calculator import calculate_sum
 
 app = Flask(__name__)
@@ -15,8 +15,7 @@ def index():
     if request.method == "POST":
         expression = (request.form.get("expression") or "").strip()
         try:
-            numbers = parse_numbers(expression)
-            total = calculate_sum(numbers)
+           total = evaluate_expression(expression)
             result = int(total) if total.is_integer() else total
         except ParseError as e:
             error = str(e)
