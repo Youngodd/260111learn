@@ -35,6 +35,29 @@
     {% if error %}
       <div class="msg err">输入有误：{{ error }}</div>
     {% endif %}
+    <hr style="margin:16px 0; border:none; border-top:1px solid #eee;" />
+
+<h3 style="margin:0 0 8px;">历史记录（最近 10 次）</h3>
+
+{% if history and history|length > 0 %}
+  <div class="hint">刷新页面不会丢（浏览器会保存）。</div>
+  <ul style="padding-left: 18px; margin-top: 10px;">
+    {% for item in history %}
+      <li style="margin: 6px 0;">
+        <span style="color:#666;">[{{ item.ts }}]</span>
+        <code>{{ item.expression }}</code>
+        {% if item.ok %}
+          → <strong>{{ item.result }}</strong>
+        {% else %}
+          → <span style="color:#b00020;">错误：{{ item.error }}</span>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <div class="hint">还没有记录。试试输入：<code>1+2*3</code></div>
+{% endif %}
+
   </div>
 </body>
 </html>
