@@ -15,7 +15,7 @@ def index():
     if request.method == "POST":
         expression = (request.form.get("expression") or "").strip()
         try:
-           total = evaluate_expression(expression)
+            total = evaluate_expression(expression)
             result = int(total) if total.is_integer() else total
         except ParseError as e:
             error = str(e)
